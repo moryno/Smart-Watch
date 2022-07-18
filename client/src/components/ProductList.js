@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Product from "./Product";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
     width:100vw;
@@ -88,3 +89,5 @@ const ProductList = () => {
 }
 
 export default ProductList
+
+{/* <Link className="link" to={"/register"}>Register</Link>  */}
