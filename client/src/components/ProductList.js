@@ -7,28 +7,28 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 3rem;
+    margin-top: 6rem;
 `;
 
 const Header = styled.div`
-   width: 65%;
+   width: 66%;
    display: flex;
    align-items: center;
-   border-radius: 0.25rem;
+   border-radius: 0.5rem;
    background-color: #F1E6FA;
    box-sizing:border-box;
-   padding: 1rem;
+   padding: 2rem;
    justify-content: space-between;
    position: relative;
-   margin-bottom: 1rem;
-   height: 3.75rem;
+   margin-bottom: 2rem;
+  
 `;
 
 const SubTitle = styled.h4`
-   font-size: 0.4rem;
-   font-size: 600;
+  
+   font-size: 500;
    color: #9B51E0;
-   margin-bottom: 0.3rem;
+   margin-bottom: 0.5rem;
 `;
 const BalanceContainer = styled.div`
    display: flex;
@@ -39,22 +39,22 @@ const BalanceContainer = styled.div`
 
 const Price = styled.span`
   color: rgb(46,51,56);
-  font-size: 0.7rem;
+  display: inline-block;
+  align-self: flex-start;
   font-weight: 800;
 `;
 
 const Button = styled.button`
    border: none;
-   border-radius:0.225rem;
-   padding: 0.2rem 0.5rem;
+   border-radius:0.25rem;
+   padding: 0.5rem 1.5rem;
    background-color: #9B51E0;
    color: #fff;
    cursor: pointer;
-   font-size: 0.4rem;
-   font-weight: 500;
+   font-weight: 600;
    position: absolute;
    bottom: 10%;
-   right: 10%;
+   right: 5%;
 `;
 
 const ProductWrapper = styled.div`
