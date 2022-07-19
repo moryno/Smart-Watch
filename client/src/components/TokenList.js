@@ -1,10 +1,15 @@
 import { Clear } from "@material-ui/icons";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 import TokenItem from "./TokenItem";
+
 
 
 const Container = styled.div`
     padding: 3.75rem;
+    ${mobile({padding: "1rem", width: "100%"})}
 `;
 
 const Header = styled.div`
@@ -41,16 +46,27 @@ const Button = styled.button`
 
 const TokenContainer = styled.div`
     display:flex;
-    padding: 2rem 4rem;
+    padding: 2rem;
     flex-wrap: wrap;
     justify-content: space-between;
     box-sizing:border-box;
-  
+   ${mobile({padding:"1rem"})}
 `;
 
 
 
 const TokenList = () => {
+    const [list, setList] = useState([]);
+   
+
+    useEffect(()=> {
+        fetch("https://api.nomics.com/v1/currencies/ticker?key=d5f60a545bf2308431031660f6c4f197499a213c&interval=1d,30d&convert=EUR")
+          .then(response => response.json())
+          .then(data => setList(data))
+    }, []);
+
+    
+
   return (
     <Container>
         <Header>
@@ -58,15 +74,12 @@ const TokenList = () => {
                 <Title>Tokens</Title>
                 <Token>$24.34</Token>
             </TitleWrapper>
-            <Button><Clear /></Button>
+            <Button><Link to={"/portfolio"}><Clear /></Link></Button>
         </Header>
         <TokenContainer>
-            <TokenItem />
-            <TokenItem />
-            <TokenItem />
-            <TokenItem />
-            <TokenItem />
-            <TokenItem />
+            {list.map(token => {
+               return <TokenItem key={token.id} token={token}  />
+            })}
             
         </TokenContainer>
     </Container>
