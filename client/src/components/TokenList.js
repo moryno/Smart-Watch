@@ -60,7 +60,7 @@ const TokenList = () => {
    
 
     useEffect(()=> {
-        fetch("https://api.nomics.com/v1/currencies/ticker?key=d5f60a545bf2308431031660f6c4f197499a213c&interval=1d,30d&convert=EUR")
+        fetch("https://celotokens.herokuapp.com/apitokens/")
           .then(response => response.json())
           .then(data => setList(data))
     }, []);
