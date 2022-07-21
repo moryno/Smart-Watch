@@ -79,27 +79,27 @@ const MarketCap = styled.span`
 `;
 
 const TokenItem = ({token}) => {
-    
-  return (
-    <Container>
-        <TitleWrapper>
-            <ImageContainer>
-                <Image src={token.tokenlogo} />
-            </ImageContainer>
+    console.log(token["1d"].price_change_pct)
+    return (
+        <Container>
+            <TitleWrapper>
+                <ImageContainer>
+                    <Image src={token.logo_url} />
+                </ImageContainer>
+                <TokenWrapper>
+                    <TokenTitle>{token.name}</TokenTitle>
+                    <Wrapper>
+                        <TokenSymbol>{token.id}</TokenSymbol>
+                        <PriceChange style={{color: token["1d"].price_change_pct > 0 ? "green" : "red"}}>{token["1d"].price_change_pct > 0 ? <ArrowDropUp />  : <ArrowDropDown /> }{Math.round(token["1d"].price_change_pct * 100) /100}%</PriceChange>
+                    </Wrapper>
+                </TokenWrapper>
+            </TitleWrapper>
             <TokenWrapper>
-                <TokenTitle>{token.tokennames}</TokenTitle>
-                <Wrapper>
-                    <TokenSymbol>{token.id}</TokenSymbol>
-                    <PriceChange style={{color: token.tokenprice > 0 ? "green" : "red"}}>{token.tokenprice > 0 ? <ArrowDropUp />  : <ArrowDropDown /> }{Math.round(token.tokenprice * 100) /100}%</PriceChange>
-                </Wrapper>
+                <TokenValue>{Math.round(token.price)}</TokenValue>
+                <MarketCap>MCap {token.market_cap}</MarketCap>
             </TokenWrapper>
-        </TitleWrapper>
-        <TokenWrapper>
-            <TokenValue>{Math.round(token.tokenprice)}</TokenValue>
-            <MarketCap>MCap {token.market_cap}</MarketCap>
-        </TokenWrapper>
-    </Container>
-  )
-}
-
-export default TokenItem
+        </Container>
+      )
+      }
+      
+      export default TokenItem
