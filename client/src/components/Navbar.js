@@ -1,4 +1,4 @@
-import logo from '../images/logo.jpg'
+import title from '../images/title.svg'
 
 const Navbar = () => {
 
@@ -6,10 +6,7 @@ const Navbar = () => {
     return ( 
         <div className="navbar">
             <div className="logo">
-                <img src={logo} alt="" />
-            </div>
-            <div className="login-button">
-                <button class="login">Enter App</button>
+                <img src={title} alt="" />
             </div>
         </div>
     );
