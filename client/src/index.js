@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/App';
+import 'boxicons';
+<script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

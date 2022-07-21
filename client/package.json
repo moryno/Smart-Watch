@@ -9,8 +9,12 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+<<<<<<< HEAD
+    "boxicons": "^2.1.2",
+=======
     "dotenv": "^16.0.1",
     "json-server": "^0.17.0",
+>>>>>>> 669c2099d04883ca431e02191439bb5215e394e9
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
