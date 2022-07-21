@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
    width: 45%;
@@ -11,6 +13,7 @@ const Container = styled.div`
    justify-content: space-between;
    margin: auto;
    margin-bottom: 1rem;
+  ${mobile({width: "100%", })}
 `;
 
 
@@ -44,14 +47,17 @@ const Button = styled.button`
 `;
 
 
-const Product = () => {
+const Product = ({item}) => {
   return (
     <Container>
                 <BalanceContainer>
-                    <SubTitle>Tokens</SubTitle>
-                    <Price>$53.01</Price>
+                    <SubTitle>{item.tokennames}</SubTitle>
+                    <Price>${item.tokenprice}</Price>
                 </BalanceContainer>
-                <Button>View</Button>
+                <Link to={`/portfolio/${item.id}`}>
+                   <Button>View</Button>
+                </Link>
+                
     </Container>
   )
 }

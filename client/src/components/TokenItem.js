@@ -1,6 +1,10 @@
+import { ArrowDownward, ArrowDropDown, ArrowDropUp } from '@material-ui/icons';
+
+import { useEffect } from "react";
 import styled from "styled-components";
 import Celo from "../img/asset_CELO.png"
 import MCelo from "../img/asset_mCELO.png"
+import { mobile } from "../responsive";
 
 const Container = styled.div`
    width: 45%;
@@ -10,6 +14,7 @@ const Container = styled.div`
    padding: 0.7rem;
    justify-content: space-between;
    margin-bottom: 0.5rem;
+   ${mobile({width:"100%"})}
 `;
 
 const TitleWrapper = styled.div`
@@ -24,15 +29,34 @@ const ImageContainer = styled.div`
     justify-content: center;
     width: 3.125rem;
     height: 3.125rem;
-    margin-right: 0.625rem
+    margin-right: 0.625rem;
 `;
 
 const Image = styled.img`
     max-width: 100%;
+    object-fit: cover;
     border-radius: 50%
 `;
 
+
 const TokenTitle = styled.p``;
+
+const TokenSymbol = styled.span`
+    font-weight: 600;
+    margin-right: 0.5rem;
+`;
+
+const Wrapper = styled.div`
+    margin-top:0.3rem;
+    display: flex;
+`;
+
+const PriceChange = styled.span`
+   display: flex;
+   align-items: center;
+   
+`;
+
 
 const TokenWrapper = styled.div`
     display: flex;
@@ -42,27 +66,37 @@ const TokenWrapper = styled.div`
 
 const TokenValue = styled.span`
     margin-bottom: 0.5rem;
-    font-size: 1.5rem
+    font-weight: 600;
+    font-size: 1.2rem;
+    align-self: flex-end;
 `;
 
-const TokenSubValue = styled.span`
+const MarketCap = styled.span`
     font-size: 1rem;
+    font-weight: 500;
     display: inline-block;
     align-self: flex-end;
 `;
 
-const TokenItem = () => {
+const TokenItem = ({token}) => {
+    
   return (
     <Container>
         <TitleWrapper>
             <ImageContainer>
-                <Image src={Celo} />
+                <Image src={token.tokenlogo} />
             </ImageContainer>
-            <TokenTitle>CELO</TokenTitle>
+            <TokenWrapper>
+                <TokenTitle>{token.tokennames}</TokenTitle>
+                <Wrapper>
+                    <TokenSymbol>{token.id}</TokenSymbol>
+                    <PriceChange style={{color: token.tokenprice > 0 ? "green" : "red"}}>{token.tokenprice > 0 ? <ArrowDropUp />  : <ArrowDropDown /> }{Math.round(token.tokenprice * 100) /100}%</PriceChange>
+                </Wrapper>
+            </TokenWrapper>
         </TitleWrapper>
         <TokenWrapper>
-            <TokenValue>$0.10</TokenValue>
-            <TokenSubValue>20.10</TokenSubValue>
+            <TokenValue>{Math.round(token.tokenprice)}</TokenValue>
+            <MarketCap>MCap {token.market_cap}</MarketCap>
         </TokenWrapper>
     </Container>
   )
