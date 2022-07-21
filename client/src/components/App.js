@@ -1,5 +1,4 @@
-
-import TokenList from "./TokenList"
+import TokenList from "./TokenList";
 import Product from "./Product";
 import ProductList from "./ProductList";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -9,15 +8,13 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<TokenList />} />
+        <Route path="/" element={<Home />} />{" "}
         <Route path="/portfolio" element={<ProductList />} />
         <Route path="/portfolio/:id" element={<TokenList />} />
-      </Routes>
+      </Routes>{" "}
     </Router>
-
-
-
   );
 }
 
 export default App;
+

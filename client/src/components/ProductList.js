@@ -85,7 +85,7 @@ const ProductList = () => {
    useEffect(()=> {
       fetch("https://celotokens.herokuapp.com/apitokens/")
   .then(response => response.json())
-  .then(data => data.forEach(item => console.log(item)))
+  .then(data => setList(data))
    }, [])
   return (
     <Container>
