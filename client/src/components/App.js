@@ -6,16 +6,22 @@ import Home from "../pages/Home";
 import Ubeswap from "./Ubeswap";
 import Deposit from "./Deposit";
 import Withdraw from "./Withdraw";
+import { useState } from "react";
 
 function App() {
+  
   return (
+    <>
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/portfolio" element={<ProductList />} />
-        <Route path="/portfolio/:id" element={<TokenList />} />
+        <Route path="/portfolio" element={<ProductList  />} />
+        <Route path="/portfolio/tokens" element={<TokenList />} />
+        <Route path="/portfolio/ubeswap" element={<Ubeswap  />} />
       </Routes>{" "}
     </Router>
+    
+    </>
   );
 }
 
