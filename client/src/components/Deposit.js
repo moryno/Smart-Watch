@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Celo from "../images/asset_CELO.png";
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(200,200,200);
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+`;
 
 const Wrapper = styled.div`
   width: 45%;
@@ -13,7 +21,8 @@ const Wrapper = styled.div`
   margin: auto;
   padding: 1.2rem;
   border-radius: 0.5rem;
-  background-color: #f9f9f9;
+  background-color: #fff;
+  box-shadow: rgba(0,0,0,0.35) 0px 5px 15px;
 `;
 
 const Header = styled.div`
@@ -109,26 +118,26 @@ const Description = styled.span`
 `;
 
 
-const Deposit = () => {
+const Deposit = ({onClose}) => {
   return (
     <Container>
       <Wrapper>
         <Header>
           <Title>Deposit</Title>
-          <Button position="top">
-          <Link to={"/portfolio"}>
+          <Button position="top" onClick={()=> onClose(false)}>
+          
             <Clear />
-          </Link>
+         
           </Button>
         </Header>
         <DepositForm>
           <InputWrapper position="top">
             <Input position="top" type={"checkbox"} id="token" name="token" />
-            <Label for="token">Deposit using 1 token</Label>
+            <Label  htmlFor="token">Deposit using 1 token</Label>
           </InputWrapper>
           <InputWrapper position="top">
             <Input position="top" type={"checkbox"} id="bothToken" name="token" />
-            <Label style={{opacity: "0.5", fontWeight: "400"}} for="bothToken">
+            <Label style={{opacity: "0.5", fontWeight: "400"}}  htmlFor="bothToken">
               Deposit using both tokens (cooming soon!)
             </Label>
           </InputWrapper>
@@ -144,11 +153,11 @@ const Deposit = () => {
             </Description>
             <InputWrapper position ="bottom">
               1 <Input position="bottom" type={"checkbox"} id="token" name="token" />
-              <Label for="token">Deposit CELO on pool</Label>
+              <Label htmlFor="token">Deposit CELO on pool</Label>
             </InputWrapper>
             <InputWrapper position ="bottom">
               2 <Input position="bottom" type={"checkbox"} id="bothToken" name="token" />
-              <Label for="bothToken">Deposit CELO-mCUSD LP token in farm</Label>
+              <Label htmlFor="bothToken">Deposit CELO-mCUSD LP token in farm</Label>
             </InputWrapper>
           </ApprovalContainer>
           <Button position="bottom">DEPOSIT</Button>
