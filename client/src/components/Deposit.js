@@ -36,6 +36,7 @@ const Button = styled.button`
   cursor: pointer;
   font-weight: 600;
   margin-top: ${props => props.position === "bottom" &&  "1rem"};
+  color:${(props) => props.position === "bottom" ? "#fff" : "lightgray"};
   
 `;
 
@@ -95,7 +96,7 @@ const Option = styled.option`
 `;
 
 const ApprovalContainer = styled.div`
-    border: 1px solid black;
+    border: 1px solid lightgray;
     border-radius:0.3rem;
     padding: 0.5rem;
     box-sizing: border-box;
@@ -106,6 +107,7 @@ const Description = styled.span`
     font-weight: 500;
     
 `;
+
 
 const Deposit = () => {
   return (
@@ -126,7 +128,7 @@ const Deposit = () => {
           </InputWrapper>
           <InputWrapper position="top">
             <Input position="top" type={"checkbox"} id="bothToken" name="token" />
-            <Label for="bothToken">
+            <Label style={{opacity: "0.5", fontWeight: "400"}} for="bothToken">
               Deposit using both tokens (cooming soon!)
             </Label>
           </InputWrapper>

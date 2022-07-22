@@ -3,6 +3,8 @@ import Product from "./Product";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { mobile } from "../responsive";
+import { Refresh } from "@material-ui/icons";
+import { style } from "@mui/system";
 
 const Container = styled.div`
   width: 100vw;
@@ -61,8 +63,16 @@ const Button = styled.button`
   cursor: pointer;
   font-weight: 600;
   position: absolute;
-  bottom: 10%;
+  top: 20%;
   right: 5%;
+`;
+
+
+const Description = styled.span`
+  position: absolute;
+  bottom: 20%;
+  right:5%;
+
 `;
 
 const ProductWrapper = styled.div`
@@ -78,45 +88,45 @@ const ProductWrapper = styled.div`
 const Error = styled.span``;
 
 const ProductList = () => {
+  const [{ data, errors, status }, setState] = useState({
+    data: null,
+    errors: null,
+    status: "idle",
+  });
 
-  const [{data, errors, status}, setState] = useState({
-   data: null,
-   errors: null, 
-   status: "idle"
-  }) 
+  const [connect, setConect] = useState(false);
 
   useEffect(() => {
-   setState(state => ({...state, errors: null, status: "pending"}));
+    setState((state) => ({ ...state, errors: null, status: "pending" }));
     fetch("https://celotokens.herokuapp.com/apitokens/")
       .then((response) => {
-         if(response.ok){
-            return response.json()
-         }
-         else {
-            return response.text().then( err => {
-               throw err;
-            })
-         }
+        if (response.ok) {
+          return response.json();
+        } else {
+          return response.text().then((err) => {
+            throw err;
+          });
+        }
       })
-      .then((data) => setState({data, errors: null, status: "fulfilled"}))
-      .catch(err => {
-         setState({data: null, errors:[err], status: "rejected"})
+      .then((data) => setState({ data, errors: null, status: "fulfilled" }))
+      .catch((err) => {
+        setState({ data: null, errors: [err], status: "rejected" });
       });
   }, []);
-  
-  if(status === "idle" || status === "pending"){
-      return <SubTitle>Loading...</SubTitle>
+
+  if (status === "idle" || status === "pending") {
+    return <SubTitle>Loading...</SubTitle>;
   }
 
-  if(status === "rejected"){
-   return (
-     <>
-       <SubTitle>Error</SubTitle>
-      {errors.map(e => (
-        <Error key={e}>{e}</Error>
-      ))}
-     </>
-   )
+  if (status === "rejected") {
+    return (
+      <>
+        <SubTitle>Error</SubTitle>
+        {errors.map((e) => (
+          <Error key={e}>{e}</Error>
+        ))}
+      </>
+    );
   }
 
   return (
@@ -125,19 +135,22 @@ const ProductList = () => {
       <Header>
         <BalanceContainer>
           <SubTitle>Total Balance</SubTitle>
-          <Price>$53.01</Price>
+          <Price>{connect ? "$53.01" : "$0.00"}</Price>
         </BalanceContainer>
-        <Button>Connect Wallet</Button>
+        <Button onClick={() => setConect((connect) => !connect)} style={{backgroundColor: connect && "transparent" ,  color: connect && "#9b51e0"}}>
+          {connect ? <Refresh /> : "Connect Wallet"}
+        </Button>
+        {connect && <Description>0x43d1eb...23225C</Description>}
       </Header>
-      <ProductWrapper>
-        {data.map((item) => {
-          return <Product key={item.id} item={item} />;
-        })}
-      </ProductWrapper>
+      {connect && (
+        <ProductWrapper>
+          {data.map((item) => {
+            return <Product key={item.id} item={item} />;
+          })}
+        </ProductWrapper>
+      )}
     </Container>
   );
 };
 
 export default ProductList;
-
-
