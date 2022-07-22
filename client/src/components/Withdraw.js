@@ -8,7 +8,15 @@ import Defi from "../images/asset_cDEFI.png";
 import CEUR from "../images/asset_mcEUR.png";
 import MOO from "../images/asset_MOO.png";
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(200,200,200);
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+`;
 
 const Wrapper = styled.div`
   width: 45%;
@@ -152,16 +160,16 @@ const Description = styled.span`
   font-weight: 500;
 `;
 
-const Deposit = () => {
+const Withdraw = ({onClose}) => {
   return (
     <Container>
       <Wrapper>
         <Header>
           <SubTitle>Withdraw Liquidity</SubTitle>
-          <Button position="top">
-            <Link to={"/portfolio"}>
+          <Button position="top" onClick={()=> onClose(false)}>
+            
               <Clear />
-            </Link>
+            
           </Button>
         </Header>
         <WithdrawForm>
@@ -221,4 +229,4 @@ const Deposit = () => {
   );
 };
 
-export default Deposit;
+export default Withdraw;

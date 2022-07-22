@@ -8,13 +8,22 @@ import CEUR from "../images/asset_mcEUR.png";
 import MOO from "../images/asset_MOO.png";
 import { Link } from "react-router-dom";
 import { Clear } from "@material-ui/icons";
+import { useState } from "react";
+import Deposit from "./Deposit";
+import Withdraw from "./Withdraw";
 
 const Container = styled.div`
-  padding: 3.75rem;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
   ${mobile({padding: "1rem", width: "100%"})}
 `;
 const TitleHeader = styled.div`
     display: flex;
+    width: 95%;
     align-items: center;
     justify-content:space-between;
     padding:2rem 3.5rem 1rem 3.5rem;
@@ -144,6 +153,10 @@ const Span = styled.span`
 `;
 
 const Ubeswap = () => {
+  const [withdraw, setWithdraw] = useState(false);
+  const [deposit, setDeposit] = useState(false);
+  
+
   return (
     <Container>
       <TitleHeader>
@@ -168,8 +181,8 @@ const Ubeswap = () => {
             </LogoContainer>
             <Price position="top">$0.1</Price>
           </HeaderWrapper>
-          <Button position="left">DEPOSIT</Button>
-          <Button position="right">WITHDRAW</Button>
+          <Button onClick={()=> setDeposit(deposit => !deposit)} position="left">DEPOSIT</Button>
+          <Button onClick={()=> setWithdraw(openModal => !openModal)} position="right">WITHDRAW</Button>
         </Header>
 
         <RewardContainer>
@@ -201,8 +214,8 @@ const Ubeswap = () => {
             </LogoContainer>
             <Price position="top">$1.09</Price>
           </HeaderWrapper>
-          <Button position="left">DEPOSIT</Button>
-          <Button position="right">WITHDRAW</Button>
+          <Button onClick={()=> setDeposit(deposit => !deposit)} position="left">DEPOSIT</Button>
+          <Button onClick={()=> setWithdraw(openModal => !openModal)} position="right">WITHDRAW</Button>
         </Header>
 
         <RewardContainer>
@@ -234,8 +247,8 @@ const Ubeswap = () => {
             </LogoContainer>
             <Price position="top">$0.1</Price>
           </HeaderWrapper>
-          <Button position="left">DEPOSIT</Button>
-          <Button position="right">WITHDRAW</Button>
+          <Button onClick={()=> setDeposit(deposit => !deposit)} position="left">DEPOSIT</Button>
+          <Button onClick={()=> setWithdraw(openModal => !openModal)} position="right">WITHDRAW</Button>
         </Header>
 
         <RewardContainer>
@@ -256,6 +269,8 @@ const Ubeswap = () => {
           </RewardWrapper>
         </RewardContainer>
       </Wrapper>
+      {deposit && <Deposit onClose={setDeposit} />}
+      {withdraw && <Withdraw onClose={setWithdraw} />}
     </Container>
   );
 };

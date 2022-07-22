@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import Product from "./Product";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { mobile } from "../responsive";
 import { Refresh } from "@material-ui/icons";
 import { style } from "@mui/system";
+import Deposit from "./Withdraw";
 
 const Container = styled.div`
   width: 100vw;
@@ -67,12 +68,10 @@ const Button = styled.button`
   right: 5%;
 `;
 
-
 const Description = styled.span`
   position: absolute;
   bottom: 20%;
-  right:5%;
-
+  right: 5%;
 `;
 
 const ProductWrapper = styled.div`
@@ -87,7 +86,7 @@ const ProductWrapper = styled.div`
 `;
 const Error = styled.span``;
 
-const ProductList = () => {
+const ProductList = ({openModal}) => {
   const [{ data, errors, status }, setState] = useState({
     data: null,
     errors: null,
@@ -95,6 +94,7 @@ const ProductList = () => {
   });
 
   const [connect, setConect] = useState(false);
+  
 
   useEffect(() => {
     setState((state) => ({ ...state, errors: null, status: "pending" }));
@@ -137,18 +137,23 @@ const ProductList = () => {
           <SubTitle>Total Balance</SubTitle>
           <Price>{connect ? "$53.01" : "$0.00"}</Price>
         </BalanceContainer>
-        <Button onClick={() => setConect((connect) => !connect)} style={{backgroundColor: connect && "transparent" ,  color: connect && "#9b51e0"}}>
+        <Button
+          onClick={() => setConect((connect) => !connect)}
+          style={{
+            backgroundColor: connect && "transparent",
+            color: connect && "#9b51e0",
+          }}
+        >
           {connect ? <Refresh /> : "Connect Wallet"}
         </Button>
         {connect && <Description>0x43d1eb...23225C</Description>}
       </Header>
       {connect && (
         <ProductWrapper>
-          {data.map((item) => {
-            return <Product key={item.id} item={item} />;
-          })}
+          <Product  />;
         </ProductWrapper>
       )}
+     
     </Container>
   );
 };
