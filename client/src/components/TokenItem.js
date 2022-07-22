@@ -1,9 +1,7 @@
-import { ArrowDownward, ArrowDropDown, ArrowDropUp } from '@material-ui/icons';
+import {ArrowDropDown, ArrowDropUp } from '@material-ui/icons';
 
-import { useEffect } from "react";
 import styled from "styled-components";
-import Celo from "../img/asset_CELO.png"
-import MCelo from "../img/asset_mCELO.png"
+
 import { mobile } from "../responsive";
 
 const Container = styled.div`
