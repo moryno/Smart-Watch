@@ -21,6 +21,11 @@ const Header = styled.div`
     border-bottom: 1px solid lightgray
 `;
 
+const SubTitle = styled.h4`
+  font-size: 500;
+  color: #9b51e0;
+  margin-bottom: 0.5rem;
+`;
 
 const TitleWrapper = styled.div`
     display:flex;
@@ -53,19 +58,51 @@ const TokenContainer = styled.div`
    ${mobile({padding:"1rem"})}
 `;
 
+const Error = styled.span``;
+
 
 
 const TokenList = () => {
-    const [list, setList] = useState([]);
-   
-
-    useEffect(()=> {
-        fetch("https://celotokens.herokuapp.com/apitokens/")
-          .then(response => response.json())
-          .then(data => setList(data))
-    }, []);
-
-    
+    const [{data, errors, status}, setState] = useState({
+        data: null,
+        errors: null, 
+        status: "idle"
+       }) 
+     
+       useEffect(() => {
+        setState(state => ({...state, errors: null, status: "pending"}));
+        fetch("https://api.nomics.com/v1/currencies/ticker?key=d5f60a545bf2308431031660f6c4f197499a213c&interval=1d,30d&convert=EUR")
+           .then((response) => {
+              if(response.ok){
+                 return response.json()
+              }
+              else {
+                 return response.text().then( err => {
+                    throw err;
+                 })
+              }
+           })
+           .then((data) => setState({data, errors: null, status: "fulfilled"}))
+           .catch(err => {
+              setState({data: null, errors:[err], status: "rejected"})
+           });
+       }, []);
+       
+       if(status === "idle" || status === "pending"){
+           return <SubTitle>Loading...</SubTitle>
+       }
+     
+       if(status === "rejected"){
+        return (
+          <>
+            <SubTitle>Error</SubTitle>
+           {errors.map(e => (
+             <Error key={e}>{e}</Error>
+           ))}
+          </>
+        )
+       }
+  
 
   return (
     <Container>
@@ -77,7 +114,7 @@ const TokenList = () => {
             <Button><Link to={"/portfolio"}><Clear /></Link></Button>
         </Header>
         <TokenContainer>
-            {list.map(token => {
+            {data.map(token => {
                return <TokenItem key={token.id} token={token}  />
             })}
             
@@ -87,3 +124,4 @@ const TokenList = () => {
 }
 
 export default TokenList
+

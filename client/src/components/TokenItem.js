@@ -1,9 +1,7 @@
-import { ArrowDownward, ArrowDropDown, ArrowDropUp } from '@material-ui/icons';
+import {ArrowDropDown, ArrowDropUp } from '@material-ui/icons';
 
-import { useEffect } from "react";
 import styled from "styled-components";
-import Celo from "../img/asset_CELO.png"
-import MCelo from "../img/asset_mCELO.png"
+
 import { mobile } from "../responsive";
 
 const Container = styled.div`
@@ -80,26 +78,4 @@ const MarketCap = styled.span`
 
 const TokenItem = ({token}) => {
     
-  return (
-    <Container>
-        <TitleWrapper>
-            <ImageContainer>
-                <Image src={token.tokenlogo} />
-            </ImageContainer>
-            <TokenWrapper>
-                <TokenTitle>{token.tokennames}</TokenTitle>
-                <Wrapper>
-                    <TokenSymbol>{token.id}</TokenSymbol>
-                    <PriceChange style={{color: token.tokenprice > 0 ? "green" : "red"}}>{token.tokenprice > 0 ? <ArrowDropUp />  : <ArrowDropDown /> }{Math.round(token.tokenprice * 100) /100}%</PriceChange>
-                </Wrapper>
-            </TokenWrapper>
-        </TitleWrapper>
-        <TokenWrapper>
-            <TokenValue>{Math.round(token.tokenprice)}</TokenValue>
-            <MarketCap>MCap {token.tokenprice}</MarketCap>
-        </TokenWrapper>
-    </Container>
-  )
 }
-
-export default TokenItem
