@@ -96,7 +96,7 @@ const TokenItem = ({token}) => {
         </TitleWrapper>
         <TokenWrapper>
             <TokenValue>{Math.round(token.tokenprice)}</TokenValue>
-            <MarketCap>MCap {token.market_cap}</MarketCap>
+            <MarketCap>MCap {token.tokenprice}</MarketCap>
         </TokenWrapper>
     </Container>
   )
