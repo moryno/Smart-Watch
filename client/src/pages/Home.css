@@ -19,7 +19,15 @@
 
 .navbar{
     display:flex;
-    justify-content:space-between;
+    justify-content:space-around;
+
+}
+
+.logo{
+    display:flex;
+    justify-content:flex-start;
+    max-width:1050px;
+    width:100%;
 }
 
 .logo img{
@@ -138,6 +146,23 @@
 }
 
     /* START OF MEDIA QUERIES */
+@media(max-width:1260px){
+    .logo{
+        display:flex;
+        justify-content:flex-start;
+        max-width:1000px;
+        width:100%;
+    }
+}
+
+@media(max-width:1060px){
+    .logo{
+        display:flex;
+        justify-content:flex-start;
+        max-width:950px;
+        width:100%;
+    }
+}
 
 @media(max-width:850px){
     .homecard-text-container{
