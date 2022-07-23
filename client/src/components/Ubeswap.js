@@ -243,7 +243,7 @@ const Ubeswap = () => {
                 <Image position="left" src={mCUSD} alt="celoImg" />
                 <Image position="right" src={CEUR} alt="mCUSDImg" />
               </ImageWrapper>
-              <Title position="top">CELO-mCUSD</Title>
+              <Title position="top">mCUSD-mCEUR</Title>
             </LogoContainer>
             <Price position="top">$0.1</Price>
           </HeaderWrapper>
