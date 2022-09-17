@@ -71,7 +71,7 @@ const TokenList = () => {
      
        useEffect(() => {
         setState(state => ({...state, errors: null, status: "pending"}));
-        fetch("https://api.nomics.com/v1/currencies/ticker?key=d5f60a545bf2308431031660f6c4f197499a213c&interval=1d,30d&convert=EUR")
+        fetch("https://celotokens.herokuapp.com/apitokens/")
            .then((response) => {
               if(response.ok){
                  return response.json()

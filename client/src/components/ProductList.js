@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import Product from "./Product";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { mobile } from "../responsive";
 import { Refresh } from "@material-ui/icons";
 import { style } from "@mui/system";
 import Deposit from "./Withdraw";
+import Web3Modal from "web3modal";
+import { providers, Contract } from "ethers";
 
 const Container = styled.div`
   width: 100vw;
@@ -86,7 +88,7 @@ const ProductWrapper = styled.div`
 `;
 const Error = styled.span``;
 
-const ProductList = ({openModal}) => {
+const ProductList = ({ openModal }) => {
   const [{ data, errors, status }, setState] = useState({
     data: null,
     errors: null,
@@ -94,7 +96,9 @@ const ProductList = ({openModal}) => {
   });
 
   const [connect, setConect] = useState(false);
-  
+  const [userAddress, setUserAddress] = useState(null);
+  const web3ModalRef = useRef();
+  const [balance,setBalance] = useState(null);
 
   useEffect(() => {
     setState((state) => ({ ...state, errors: null, status: "pending" }));
@@ -114,6 +118,15 @@ const ProductList = ({openModal}) => {
       });
   }, []);
 
+  useEffect(() => {
+    web3ModalRef.current = new Web3Modal({
+      network: "goerli",
+      providerOptions: {},
+      disableInjectedProvider: false,
+      cacheProvider: false,
+    }); //getTotalTendersLength();
+  },[userAddress]);
+
   if (status === "idle" || status === "pending") {
     return <SubTitle>Loading...</SubTitle>;
   }
@@ -129,16 +142,59 @@ const ProductList = ({openModal}) => {
     );
   }
 
+
+
+  //connect to wallet
+  const getProviderOrSigner = async (needSigner = false) => {
+    //connect metamask
+    const provider = await web3ModalRef.current.connect();
+    const web3Provider = new providers.Web3Provider(provider); //check if user is connected to goerli network
+    const { chainId } = await web3Provider.getNetwork();
+    if (chainId !== 5) {
+      window.alert("Change network to Goerli");
+      throw new Error("Change network To Goerli");
+    } // alert("network is goerli") //if need signer for transactions
+    if (needSigner) {
+      const signer = web3Provider.getSigner();
+      // const accounts = await signer.getAddress();
+      return signer;
+    }
+    return web3Provider;
+  };
+  const getUserAddress =async ()=>{
+    const signa =await getProviderOrSigner(true);
+    const accounts = await signa.getAddress();
+    const amount = await signa.getBalance();
+    setUserAddress(accounts);
+    setBalance(amount);
+  }
+  
+  const DectectWindow = async () => {
+    try {
+      await getProviderOrSigner();
+      alert("set account");
+      await getUserAddress();
+    } catch (error) {
+      console.error(error);
+      alert(error);
+    }
+  };
+
+  console.log(userAddress);
+
+
+
+
   return (
     <Container>
       <Title>Portfolio</Title>
       <Header>
         <BalanceContainer>
           <SubTitle>Total Balance</SubTitle>
-          <Price>{connect ? "$53.01" : "$0.00"}</Price>
+          <Price>{connect ? Math.round(balance/Math.pow(10,18)*10000)/10000: "$0.00"} eth </Price>
         </BalanceContainer>
         <Button
-          onClick={() => setConect((connect) => !connect)}
+          onClick={() =>{ setConect((connect) => !connect); DectectWindow()}}
           style={{
             backgroundColor: connect && "transparent",
             color: connect && "#9b51e0",
@@ -146,14 +202,13 @@ const ProductList = ({openModal}) => {
         >
           {connect ? <Refresh /> : "Connect Wallet"}
         </Button>
-        {connect && <Description>0x43d1eb...23225C</Description>}
+        {connect && <Description>{userAddress}</Description>}
       </Header>
       {connect && (
         <ProductWrapper>
-          <Product  />;
+          <Product />;
         </ProductWrapper>
       )}
-     
     </Container>
   );
 };
