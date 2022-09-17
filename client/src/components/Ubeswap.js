@@ -18,28 +18,26 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  
-  ${mobile({padding: "1rem", width: "100%"})}
+
+  ${mobile({ padding: "1rem", width: "100%" })}
 `;
 const TitleHeader = styled.div`
-    display: flex;
-    width: 95%;
-    align-items: center;
-    justify-content:space-between;
-    padding:2rem 3.5rem 1rem 3.5rem;
-    box-sizing: border-box;
-    border-bottom: 1px solid lightgray;
-    margin-bottom: 3rem;
-    ${mobile({padding: "0", width: "100%"})}
+  display: flex;
+  width: 95%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 3.5rem 1rem 3.5rem;
+  box-sizing: border-box;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 3rem;
+  ${mobile({ padding: "0", width: "100%" })}
 `;
 
-
-
 const TitleWrapper = styled.div`
-    display:flex;
-    alig-items: center;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  alig-items: center;
+  justify-content: center;
+  flex-direction: column;
 `;
 
 const Wrapper = styled.div`
@@ -94,7 +92,12 @@ const Image = styled.img`
 const Title = styled.h2`
   font-weight: 600;
   font-size: ${(props) => (props.position === "top" ? "1.2rem" : "1rem")};
-  color: ${(props) => (props.position === "top" ? "inherit" : props.position === "bottom" ? "#b2afb1 " : "#9b51e0")};
+  color: ${(props) =>
+    props.position === "top"
+      ? "inherit"
+      : props.position === "bottom"
+      ? "#b2afb1 "
+      : "#9b51e0"};
   margin-bottom: ${(props) => (props.position === "top" ? "0" : "0.5rem")};
 `;
 
@@ -106,14 +109,18 @@ const Price = styled.span`
 const Button = styled.button`
   margin-top: 1rem;
   border: ${(props) =>
-    props.position === "left" || props.position === "right" 
+    props.position === "left" || props.position === "right"
       ? "none"
-      : props.position === "bottom" ? "1px solid #624e7b" : "none"};
+      : props.position === "bottom"
+      ? "1px solid #624e7b"
+      : "none"};
   border-radius: 0.625rem;
   color: ${(props) =>
     props.position === "left" || props.position === "right"
       ? "#fff"
-      : props.position === "bottom" ? "1px solid #624e7b" : "none"};
+      : props.position === "bottom"
+      ? "1px solid #624e7b"
+      : "none"};
   background-color: ${(props) =>
     props.position === "left"
       ? "#b195d4"
@@ -155,7 +162,6 @@ const Span = styled.span`
 const Ubeswap = () => {
   const [withdraw, setWithdraw] = useState(false);
   const [deposit, setDeposit] = useState(false);
-  
 
   return (
     <Container>
@@ -181,8 +187,18 @@ const Ubeswap = () => {
             </LogoContainer>
             <Price position="top">$0.1</Price>
           </HeaderWrapper>
-          <Button onClick={()=> setDeposit(deposit => !deposit)} position="left">DEPOSIT</Button>
-          <Button onClick={()=> setWithdraw(openModal => !openModal)} position="right">WITHDRAW</Button>
+          <Button
+            onClick={() => setDeposit((deposit) => !deposit)}
+            position="left"
+          >
+            DEPOSIT
+          </Button>
+          <Button
+            onClick={() => setWithdraw((openModal) => !openModal)}
+            position="right"
+          >
+            WITHDRAW
+          </Button>
         </Header>
 
         <RewardContainer>
@@ -214,8 +230,18 @@ const Ubeswap = () => {
             </LogoContainer>
             <Price position="top">$1.09</Price>
           </HeaderWrapper>
-          <Button onClick={()=> setDeposit(deposit => !deposit)} position="left">DEPOSIT</Button>
-          <Button onClick={()=> setWithdraw(openModal => !openModal)} position="right">WITHDRAW</Button>
+          <Button
+            onClick={() => setDeposit((deposit) => !deposit)}
+            position="left"
+          >
+            DEPOSIT
+          </Button>
+          <Button
+            onClick={() => setWithdraw((openModal) => !openModal)}
+            position="right"
+          >
+            WITHDRAW
+          </Button>
         </Header>
 
         <RewardContainer>
@@ -247,8 +273,18 @@ const Ubeswap = () => {
             </LogoContainer>
             <Price position="top">$0.1</Price>
           </HeaderWrapper>
-          <Button onClick={()=> setDeposit(deposit => !deposit)} position="left">DEPOSIT</Button>
-          <Button onClick={()=> setWithdraw(openModal => !openModal)} position="right">WITHDRAW</Button>
+          <Button
+            onClick={() => setDeposit((deposit) => !deposit)}
+            position="left"
+          >
+            DEPOSIT
+          </Button>
+          <Button
+            onClick={() => setWithdraw((openModal) => !openModal)}
+            position="right"
+          >
+            WITHDRAW
+          </Button>
         </Header>
 
         <RewardContainer>
